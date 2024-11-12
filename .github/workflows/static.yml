@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask My Crush</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="question">HI CRUSH
+        <br>do you like me?</div>
+
+    <div class="button-container">
+        <button class="button yes" onclick="handleYes()">Yes</button>
+        <button id="noBtn" class="button no" onclick="handleNo()">No</button>
+    </div>
+
+    <div id="responseMessage" class="love-message hidden">
+        <p>💖 I knew you'd say yes! Here are some love messages for you: 💖</p>
+        <ul>
+            <li>"You make my heart skip a beat!"</li>
+            <li>"I can't stop thinking about you!"</li>
+            <li>"You're the best part of my day!"</li>
+            <li>"I feel so lucky to have you in my life!"</li>
+            <h2>created by troy inspired by val</h2>
+        </ul>
+    </div>
+</div>
+
+<script>
+    let noCount = 0;  // Keep track of how many "No" buttons have been created
+    const maxNoButtons = 50;  // Limit the number of "No" buttons
+
+    // Function to handle the "Yes" button click (redirect)
+    function handleYes() {
+        window.location.href = "https://your-love-messages-page.com"; // Replace with the URL for your love messages page
+    }
+
+    // Function to handle the "No" button click (create a new button)
+    function handleNo() {
+        noCount++;
+        const noBtn = document.getElementById('noBtn');
+        
+        // Hide the original "No" button
+        noBtn.style.display = 'none';
+
+        // Create a new "No" button with increasing size
+        if (noCount <= maxNoButtons) {
+            const newNoBtn = document.createElement('button');
+            newNoBtn.textContent = 'No';
+            newNoBtn.classList.add('no-button');
+            
+            // Random position for the new button
+            const randomX = Math.random() * window.innerWidth;
+            const randomY = Math.random() * window.innerHeight;
+            newNoBtn.style.left = `${randomX}px`;
+            newNoBtn.style.top = `${randomY}px`;
+
+            // Apply different sizes based on how many "No"s have been clicked
+            if (noCount <= 10) {
+                newNoBtn.classList.add('large');
+            } else if (noCount <= 20) {
+                newNoBtn.classList.add('extra-large');
+            } else if (noCount <= 30) {
+                newNoBtn.classList.add('giant');
+            } else {
+                newNoBtn.classList.add('super-giant');
+            }
+            
+            // Add the new button to the page
+            document.body.appendChild(newNoBtn);
+            
+            // Add the click handler for the new button
+            newNoBtn.onclick = handleNo;
+        }
+    }
+</script>
+
+</body>
+</html>
